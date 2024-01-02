@@ -4,6 +4,7 @@ tasks:
   init:
     cmds:
       - echo "service initialize..."
+      - python -m venv env
       - source env/bin/activate
       - pip install -r requirements.txt
     silent: true
@@ -18,4 +19,21 @@ tasks:
     cmds:
       - echo "detector starting..."
       - python main.py
+    silent: true
+
+  gen:
+    cmds:
+      - echo "generate requirements.txt..."
+      - pipreqs --force .
+    silent: true
+
+  gen-gitignore:
+    cmds:
+      - echo "generate .gitignore..."
+      - touch .gitignore
+      - echo "*env/" >> .gitignore
+      - echo ".vscode/" >> .gitignore
+      - echo ".idea/" >> .gitignore
+      - echo "__pycache__/" >> .gitignore
+      - echo ".DS_Store" >> .gitignore
     silent: true
